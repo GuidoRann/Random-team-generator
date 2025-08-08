@@ -22,27 +22,59 @@ function isRepeated(groups: DayGroups, previous: Set<string>[]): boolean {
   return false;
 }
 
-export function generateGroups(students: Student[], groupCount: number, dayCount: number): AllDaysGroups {
+export function generateGroups(
+  students: Student[],
+  groupCount: number,
+  dayCount: number
+): AllDaysGroups {
+  if (students.length < groupCount) {
+    throw new Error("La cantidad de grupos no puede ser mayor que la cantidad de alumnos.");
+  }
+
+  const groupSize = Math.floor(students.length / groupCount);
+  if (groupSize === 0) {
+    throw new Error("Cada grupo debe tener al menos un alumno.");
+  }
+
+  const maxUniqueCombinations = factorial(students.length) / (factorial(groupSize) ** groupCount);
+  if (dayCount > maxUniqueCombinations) {
+    throw new Error("No es posible generar tantos días sin repetir grupos.");
+  }
+
   const days: AllDaysGroups = [];
-  const previousGroups: Set<string>[] = []; // Para detectar repeticiones
+  const previousGroups: Set<string>[] = [];
 
   for (let day = 0; day < dayCount; day++) {
-    let shuffled = shuffle([...students]);
-    let dayGroups: DayGroups = [];
+    let attempts = 0;
+    let maxAttempts = 50;
+    let validDay = false;
 
-    for (let i = 0; i < groupCount; i++) {
-      const group = shuffled.splice(0, Math.floor(students.length / groupCount));
-      dayGroups.push(group);
+    while (!validDay && attempts < maxAttempts) {
+      attempts++;
+      const shuffled = shuffle([...students]);
+      const dayGroups: DayGroups = [];
+
+      for (let i = 0; i < groupCount; i++) {
+        const group = shuffled.splice(0, groupSize);
+        dayGroups.push(group);
+      }
+
+      if (!isRepeated(dayGroups, previousGroups)) {
+        days.push(dayGroups);
+        previousGroups.push(new Set(dayGroups.map(g => g.map(s => s.id).sort().join(','))));
+        validDay = true;
+      }
     }
 
-    // Validar que los grupos no se repitan exactamente
-    if (!isRepeated(dayGroups, previousGroups)) {
-      days.push(dayGroups);
-      previousGroups.push(new Set(dayGroups.map(g => g.map(s => s.id).sort().join(','))));
-    } else {
-      day--; // Reintentar
+    if (!validDay) {
+      throw new Error("No se pudieron generar grupos únicos para todos los días.");
     }
   }
 
   return days;
+}
+
+function factorial(n: number): number {
+  if (n <= 1) return 1;
+  return n * factorial(n - 1);
 }

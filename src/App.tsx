@@ -1,12 +1,18 @@
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Landing } from './Landing';
+import GeneratorPage from './pages/GeneratorPage';
 
 function App() {
 
   return (
-    <div className="max-w-xl mx-auto p-6 space-y-6">
-      <h1 className="text-2xl font-bold"> Generador de grupos aleatorios </h1>
-      <Landing />
-    </div>
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Landing />} />
+          <Route path="/generator" element={<GeneratorPage />} />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 
