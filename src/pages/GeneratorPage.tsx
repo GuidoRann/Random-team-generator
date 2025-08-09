@@ -14,6 +14,7 @@ import { Link } from 'react-router-dom';
 import { generateGroups } from '@/service/StudentService';
 import type { AllDaysGroups, Student } from '@/types/Types';
 import { toast } from "sonner";
+import { exportPDF } from '@/components/ExportPDF ';
 
 export default function GeneratorPage() {
   const [ name, setName ] = useState("");
@@ -290,7 +291,7 @@ export default function GeneratorPage() {
               </div>
               
               <div className="fixed bottom-4 left-4 right-4 flex gap-3 bg-white/90 backdrop-blur-sm p-4 rounded-xl border border-teal-200">
-                <Button onClick={ () => {} } className="flex-1 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                <Button onClick={ exportPDF } className="flex-1 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
                   <Download className="h-4 w-4 mr-2" />
                   Exportar PDF
                 </Button>
@@ -340,7 +341,7 @@ export default function GeneratorPage() {
               </div>
               
               <div className="flex justify-center gap-4 mt-6 pt-4 border-t border-teal-200">
-                <Button onClick={ () => {} } className="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                <Button onClick={ exportPDF } className="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
                   <Download className="h-4 w-4 mr-2" />
                   Exportar PDF
                 </Button>
@@ -348,7 +349,7 @@ export default function GeneratorPage() {
                   Cerrar
                 </Button>
               </div>
-        </div>
+           </div>
             </DialogContent>
           </Dialog>
       )}
