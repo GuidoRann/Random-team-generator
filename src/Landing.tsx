@@ -40,7 +40,7 @@ export const Landing = () => {
             <h1 className="text-6xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-teal-600 via-emerald-600 to-cyan-600 mb-6 leading-tight">
               Generador de Grupos
               <span className="block text-5xl md:text-6xl bg-gradient-to-r from-emerald-500 to-teal-500 bg-clip-text">
-                ✨ Aleatorios ✨
+                Aleatorios
               </span>
             </h1>
             
@@ -89,8 +89,8 @@ export const Landing = () => {
           {/* Footer */}
           <div className="text-gray-500 text-sm">
             <p className="flex items-center justify-center gap-2">
-              <span>Hecho con</span>
-              <span className="text-red-500 animate-pulse">❤️</span>
+              <span>&lt;&gt; con ❤️ por</span>
+              <a target="_blank" href="https://guidocode.vercel.app/" className="text-purple-400 font-medium">GuidoCode</a>
               <span>para educadores increíbles</span>
             </p>
           </div>
