@@ -270,7 +270,6 @@ export default function GeneratorPage() {
             side="bottom"
             className="h-[90vh] overflow-y-auto bg-gradient-to-t from-teal-50 to-white"
           >
-            {/* PONÉ EL REF AQUÍ */}
             <div ref={exportRef as any} className="p-10">
               <SheetHeader>
                 <SheetTitle className="text-2xl font-bold text-center mb-4 text-teal-800">
@@ -335,8 +334,7 @@ export default function GeneratorPage() {
       ) : (
         // DESKTOP
         <Dialog open={showResults} onOpenChange={setShowResults}>
-          <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto bg-gradient-to-br from-teal-50 to-white">
-            {/* MISMO REF AQUÍ (solo se renderiza uno de los dos) */}
+          <DialogContent className="max-w-6xl max-h-[80vh] overflow-y-auto bg-gradient-to-br from-teal-50 to-white">
             <div ref={exportRef as any} className="p-7">
               <DialogHeader>
                 <DialogTitle className="text-2xl font-bold text-center mb-4 text-teal-800 pb-10">
@@ -344,7 +342,7 @@ export default function GeneratorPage() {
                 </DialogTitle>
               </DialogHeader>
 
-              <div className="space-y-6">
+              <div className="space-y-6 grid gap-6 grid-cols-2">
                 {groupsMatrix.map((day, dayIndex) => (
                   <div key={dayIndex} className="space-y-4">
                     <h3 className="text-xl font-semibold text-teal-700 flex items-center gap-2">
@@ -398,110 +396,6 @@ export default function GeneratorPage() {
           </DialogContent>
         </Dialog>
       )}
-
-
-
-     {/*  {isMobile ? (
-         <Sheet open={ showResults } onOpenChange={ setShowResults }>
-            <SheetContent side="bottom" className="h-[90vh] overflow-y-auto bg-gradient-to-t from-teal-50 to-white">
-            <div id="img-content" className="p-10">
-              <SheetHeader>
-                <SheetTitle className="text-2xl font-bold text-center mb-4 text-teal-800">
-                  🎯 Grupos Generados
-                </SheetTitle>
-              </SheetHeader>
-              
-              <div className="space-y-6 pb-20">
-                { groupsMatrix.map(( day, dayIndex ) => (
-                  <div key={ dayIndex } className="space-y-4">
-                    <h3 className="text-xl font-semibold text-teal-700 flex items-center gap-2">
-                      📅 Día { dayIndex + 1 }
-                    </h3>
-                    
-                    <div className="space-y-3">
-                      { day.map(( group, groupIndex ) => (
-                        <div key={ groupIndex } className="border-2 border-teal-200 rounded-xl p-4 bg-white/80 backdrop-blur-sm shadow-sm">
-                          <h4 className="font-semibold text-lg mb-3 text-teal-600 flex items-center gap-2">
-                            👥 Grupo { groupIndex + 1 }
-                          </h4>
-                          <ul className="space-y-2">
-                            { group.map(( student ) => (
-                              <li key={ student.id } className="flex items-center text-gray-700">
-                                <span className="w-2 h-2 bg-teal-400 rounded-full mr-3"></span>
-                                { student.name }
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-              
-              <div className="fixed bottom-4 left-4 right-4 flex gap-3 bg-white/90 backdrop-blur-sm p-4 rounded-xl border border-teal-200">
-                <Button onClick={ exportImage } className="flex-1 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-                  <Download className="h-4 w-4 mr-2" />
-                  Exportar PDF
-                </Button>
-                <Button variant="outline" onClick={() => setShowResults(false)} className="flex-1 border-teal-300 text-teal-700 hover:bg-teal-50">
-                  Cerrar
-                </Button>
-              </div>
-        </div>
-            </SheetContent>
-          </Sheet>
-      ) : (
-        <Dialog open={ showResults } onOpenChange={ setShowResults }>
-            <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto bg-gradient-to-br from-teal-50 to-white">
-            <div id="img-content" className="p-7">
-              <DialogHeader>
-                <DialogTitle className="text-2xl font-bold text-center mb-4 text-teal-800 pb-10">
-                  🎯 Grupos Generados
-                </DialogTitle>
-              </DialogHeader>
-              
-              <div className="space-y-6">
-                { groupsMatrix.map(( day, dayIndex ) => (
-                  <div key={ dayIndex } className="space-y-4">
-                    <h3 className="text-xl font-semibold text-teal-700 flex items-center gap-2">
-                      📅 Día { dayIndex + 1 }
-                    </h3>
-                    
-                    <div className="grid md:grid-cols-2 gap-4">
-                      {  day.map(( group, groupIndex ) => (
-                        <div key={ groupIndex } className="border-2 border-teal-200 rounded-xl p-4 bg-white/80 backdrop-blur-sm shadow-sm hover:shadow-md transition-all duration-300">
-                          <h4 className="font-semibold text-lg mb-3 text-teal-600 flex items-center gap-2">
-                            👥 Grupo { groupIndex + 1 }
-                          </h4>
-                          <ul className="space-y-2">
-                            { group.map(( student ) => (
-                              <li key={ student.id } className="flex items-center text-gray-700">
-                                <span className="w-2 h-2 bg-teal-400 rounded-full mr-3"></span>
-                                { student.name }
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-              
-              <div className="flex justify-center gap-4 mt-6 pt-4 border-t border-teal-200">
-                <Button onClick={ exportImage } className="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-                  <Download className="h-4 w-4 mr-2" />
-                  Exportar PDF
-                </Button>
-                <Button variant="outline" onClick={ () => setShowResults( false ) } className="border-teal-300 text-teal-700 hover:bg-teal-50">
-                  Cerrar
-                </Button>
-              </div>
-           </div>
-            </DialogContent>
-          </Dialog>
-      )}*/}
     </div>
   )
 }
