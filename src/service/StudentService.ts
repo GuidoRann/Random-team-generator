@@ -31,12 +31,14 @@ export function generateGroups(
     throw new Error("La cantidad de grupos no puede ser mayor que la cantidad de alumnos.");
   }
 
-  const groupSize = Math.floor(students.length / groupCount);
-  if (groupSize === 0) {
+  const baseSize  = Math.floor(students.length / groupCount);
+  const remainder = students.length % groupCount; 
+  
+  if (baseSize  === 0) {
     throw new Error("Cada grupo debe tener al menos un alumno.");
   }
 
-  const maxUniqueCombinations = factorial(students.length) / (factorial(groupSize) ** groupCount);
+  const maxUniqueCombinations = factorial(students.length) / (factorial( baseSize ) ** groupCount );
   if (dayCount > maxUniqueCombinations) {
     throw new Error("No es posible generar tantos días sin repetir grupos.");
   }
@@ -55,7 +57,8 @@ export function generateGroups(
       const dayGroups: DayGroups = [];
 
       for (let i = 0; i < groupCount; i++) {
-        const group = shuffled.splice(0, groupSize);
+        const size = baseSize + (i < remainder ? 1 : 0);
+        const group = shuffled.splice(0, size);
         dayGroups.push(group);
       }
 
